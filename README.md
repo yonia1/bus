@@ -3,3 +3,4 @@
 # Run as : 
 # npm install
 # npm start
+# Browse http://localhost:3000/
