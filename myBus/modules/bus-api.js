@@ -5,10 +5,7 @@ var request = require('request');
 var NodeCache = require( "node-cache" );
 var conf = require('../configuration/config');
 var myCache = new NodeCache( { stdTTL: conf.cacheEvicTime, checkperiod: 60 } );
-
-
 var Q = require("q");
-
 var HOURS_PER_DAY=24;
 
 module.exports = {
@@ -17,9 +14,7 @@ module.exports = {
     * Return a promise object of the result*/
     getBusFrequencyPerHour: function() {
         var deferred = Q.defer();
-
-        var counter={};
-
+         var counter={};
         /*Serve from cache if stored else fetch and store */
         myCache.get( "counter", function( err, value ){
             if( !err ){
@@ -52,10 +47,6 @@ module.exports = {
                                 //console.log("start time " + start);
                                // console.log("start time " + data[i].startTime);
                                 var end = new Date(data[i].endTime).getHours();
-
-                               // console.log("end time " + end);
-
-                               // console.log("end time " + data[i].endTime);
                                 for (var currTime = start; currTime <= end; currTime++) {
                                     if (counter[currTime])
                                         counter[currTime] += 1;
@@ -67,9 +58,9 @@ module.exports = {
                                 console.log(e);
                             }
                         }
-                       // console.log(data[currTime].endTime);
+
                         var result=translteObejct2Array(counter);
-                        //console.log(result);
+
                         myCache.set("counter", result, function (err, success) {
                             if (!err && success) {
                                 console.log(success);
@@ -85,9 +76,6 @@ module.exports = {
                         })
                         deferred.resolve (result);
 
-
-
-
                     });
 
                 }else{
@@ -99,7 +87,6 @@ module.exports = {
         });
         return deferred.promise;
     }
-
 
 };
 /*Translate the hours object to array*/

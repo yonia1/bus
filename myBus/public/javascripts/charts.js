@@ -1,10 +1,13 @@
+
 /**
  * Created by Yoni on 06/10/2015.
  * Display charts model
  *
  */
 var charts=(function(){
-
+    /*Bar chart model
+     * id : the document element to disply the chart
+     * dataUrl : the json data to use for the chart*/
     var displayBarChart=function(id,dataUrl)
     {
         var margin ={top:20, right:30, bottom:30, left:40},
